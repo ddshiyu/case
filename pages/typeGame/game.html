@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrapper{
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;          
+            background: url('img/bg.jpg') no-repeat top left / 100% 100%;
+        }
+        .board{
+            width:300px;
+            height:360px;
+            background: url(img/board.png) no-repeat left top / cover;
+            position:absolute;
+            right:30px;
+            bottom:30px; 
+        }
+        .score{
+            position: absolute;
+            left:50%;
+            top:40%;
+            transform:translate(-50%, -50%);
+            font-size:20px;
+            font-weight:bold;
+        }
+        .score p{
+            line-height:2.5em;
+        }
+        #letters-main{
+            position:absolute;
+            height:100%;
+            left: 0;
+            top:0;
+            right:330px;
+            bottom:0;
+        }
+        .letters{
+            position:absolute;
+            width:100px;
+            height:100px;
+            z-index: 1;
+        }
+        #gameOver{
+            display: none;
+            position:absolute;
+            left: 0;
+            top:0;
+            right:0;
+            bottom:0;
+            background:rgba(0,0,0,.4);
+            text-align: center;
+        }
+        #gameOver h1{
+            margin-top:300px;
+            font-size:50px;
+        }
+    </style>
+</head>
+<body>
+    <div id='wrapper'>
+        <div id="letters-main">
+        </div>
+        <div class="board">
+            <div class="score">
+                <p>得分：0</p>
+                <p>丢失：0/10</p>
+            </div>
+        </div>
+    </div>
+    <div id='gameOver'>
+        <h1>游戏结束</h1>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

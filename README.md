@@ -2,4 +2,4 @@
 
 放在gh-pages分支中
 
-(预览)[https://code.jdqiong.cn/]
+[预览](https://code.jdqiong.cn/)

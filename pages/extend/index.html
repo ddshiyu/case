@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>继承</h1>
+  <script>
+    function Animal (name, weight) {
+      this.name = name
+      this.weight = weight
+      this.teeth = 30
+    }
+    Animal.prototype.color = 'white'
+    Animal.prototype.legs = [1, 2, 4]
+    Animal.prototype.run = function () {
+      console.log('奔跑方法')
+    }
+
+
+    function Dog (speed) {
+      this.speed = speed
+    }
+    function Duck (speed) {
+      this.speed = speed
+    }
+    Dog.prototype = new Animal('狗', 30)
+    Duck.prototype = new Animal('鸭子', 10)
+    const animal = new Animal('猪', 29)
+    const dog = new Dog()
+    const duck = new Duck()
+    console.log(dog.name);
+    console.log(dog.weight);
+    console.log(dog.color);
+    dog.run()
+    // 可以传参，也可以使用原型上的方法
+    dog.name = 'pig'
+    dog.color = 'black'
+    // push会发生更改父类属性，直接赋值不会更改
+    // dog.legs.push(6)
+    dog.legs = [4]
+    console.log(animal.name)
+    console.log(duck.name)
+    console.log(duck.color)
+    console.log(duck.legs)
+    console.log(dog.color)
+    console.log(dog.legs)
+
+
+    function Tiger () {
+      Animal.call(this)
+    }
+    const tiger = new Tiger()
+    console.log(tiger.color); // undefined 不能访问到原型上的属性
+    console.log(tiger.teeth); // 30 可以访问实例属性
+
+
+    function Lion(name, weight) {
+      Animal.call(this, name, weight)
+    }
+    Lion.prototype = new Animal()
+    Lion.prototype.constructor = Lion // 构造函数指回原来的函数
+    const lion = new Lion('狮子', 200)
+    console.log(lion.name);
+    console.log(lion.color);
+
+
+    const person = {
+      name: 'John',
+      age: 36,
+      say: function () {
+        console.log('hi')
+      }
+    }
+    // 类似Object.create()
+    function object(obj) {
+      function F () {}
+      F.prototype = obj
+      return new F()
+    }
+    const student = object(person)
+    console.log(student.name)
+    console.log(student.age)
+    student.say() // hi, 方法也可以继承
+
+
+    function jisheng(obj) {
+      const clone = object(obj)
+      clone.sayHi = function () {
+        console.log('sayhi') // 多了一种添加公共方法
+      }
+      return clone
+    }
+    const teacher = jisheng(person)
+    console.log(teacher.name)
+    console.log(teacher.age)
+    teacher.sayHi() // hi, 方法也可以继承
+
+
+    function Monkey () {
+      Animal.call(this)
+    }
+    const con = object(Animal.prototype)
+    Monkey.prototype = con
+    Monkey.prototype.constructor = Monkey
+    const monkey = new Monkey()
+    console.log(monkey.color)
+  </script>
+</body>
+</html>
